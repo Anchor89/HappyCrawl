@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="debug" strict="true" name="XMLConfigTest" packages="org.apache.logging.log4j.test">
+    <properties>
+        <property name="logdir">log</property>
+        <property name="filename">HappyCrawler</property>
+        <property name="pattern">%highlight{%-5p %d{HH:mm:ss.SSS} [%t] %logger{36}- %msg%n}</property>
+    </properties>
+
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+
+        <File name="File" fileName="${logdir}/${filename}.log" >
+            <PatternLayout pattern="${pattern}" />
+        </File>
+
+        <!--RollingFile name="RollingFile" filename="${logdir}/${filename}.log" filePattern="${logdir}/$${date:yyyy-MM}/${filename}-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${pattern}" />
+            <TimeBasedTriggeringPolicy />
+        </RollingFile-->
+    </appenders>
+
+    <loggers>
+        <root level="trace">
+            <appender-ref ref="Console" />
+            <appender-ref ref="File" />
+        </root>
+    </loggers>
+</configuration>

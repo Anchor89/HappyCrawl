@@ -37,10 +37,16 @@ public class Fetcher {
 			} else {
 				String url = pager.getUri();
 				if (url != null) {
-					try {
-						pager.setDoc(fetch(this.pager));
-					} catch (IOException e) {
-						logger.error("Crawling for URL:" + url + "\n" + e);
+					int tryTime = 0;
+					while (tryTime++ < 3) {
+						try {
+							pager.setDoc(fetch(this.pager));
+							tryTime = 3;
+							logger.info("Success crawled:" + pager.getId());
+						} catch (IOException e) {
+							logger.error("Fail(" + tryTime + ") to crawl for URL:" + url + "\n"
+									+ e);
+						}
 					}
 				} else {
 					logger.error("Pager with id:" + pager.getId() + " has NULL url.");
@@ -51,7 +57,7 @@ public class Fetcher {
 		protected Document fetch(Pager pager) throws IOException {
 			Document result = null;
 			if (pager instanceof HttpPager) {
-				result = Jsoup.connect(pager.getUri()).get();				
+				result = Jsoup.connect(pager.getUri()).timeout(20000).get();				
 			} else if (pager instanceof FilePager) {
 				File file = new File(pager.getUri());
 				result = Jsoup.parse(file, "UTF-8");				

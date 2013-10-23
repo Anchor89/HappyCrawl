@@ -16,6 +16,10 @@ public class DzgzIndex extends FilePager {
 		super(id, path);
 	}
 
+	/**
+	 * Return:
+	 * id-><a...>
+	 */
 	@Override
 	public Map<String, String> convert() {
 		Map<String, String> result = new HashMap<String, String>();

@@ -24,7 +24,22 @@ public class Try {
 	String host = "http://www.ituring.com.cn";
 	
 	@Test
-/*	public void test() throws IOException {
+	public void testParse() {
+		String html = "<a class=\"question_link\" href=\"http://chuansongme.com/n/113731\" id=\"__w2_o3iaxPJ_link\" target=\"_blank\"> 今日面试题：相差甚远；及Magic Index分析 </a>";
+		Document doc = Jsoup.parse(html);
+		U.println(doc);	
+		U.println(doc.body().html());
+	}
+	
+	@Test
+	public void tryURL() throws MalformedURLException {
+		URL url = new URL("http://chuansongme.com/n/113731");
+		U.println(url.getProtocol());
+		U.println(url.getHost());
+	}
+
+	/*@Test
+	public void test() throws IOException {
 		File file = new File("book.html");
 		FileWriter fw = new FileWriter(file);
 		Document doc = Fetcher.fetchHtml("http://www.ituring.com.cn/minibook/787#");

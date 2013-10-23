@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
@@ -21,15 +23,15 @@ public class ContentCombiner implements Combiner {
 		if (pagers!=null && pagers.size()>0) {
 			Pager index = pagers.get(0);
 			Map<String, String> cooked = index.convert();
-			Element ele = new Element(tag, "");
+			Document doc = null;
 			Elements items = new Elements(cooked.size() + 1);
 			for (int i=0; i<cooked.size(); i++) {
 				items.add(null);
 			}
 			for (String k : cooked.keySet()) {
 				String v = cooked.get(k);
-				ele.html(v);
-				items.set(Integer.valueOf(k), ele.select("a").get(0));
+				doc = Jsoup.parse(v);
+				items.set(Integer.valueOf(k), doc.body().child(0));
 			}
 			for (Element item : items) {
 				result += item;

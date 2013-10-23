@@ -1,4 +1,4 @@
-package anchor89.main;
+package anchor89.demo;
 
 import java.net.MalformedURLException;
 import java.net.URL;

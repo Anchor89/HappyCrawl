@@ -21,13 +21,13 @@ Powered by Jsoup, you can use css selector in your code to select the element(s)
 Demo:
 Here is a page contains a list of URLs which direct me to some interesting articles. So I want to start with this page and collect all the articles into one HTML file which may be coverted into a PDF or something else. But a have download the content page into my local disk
 
-1. So I derived a FilePager constructed with the path to the file. When override the convert() method, I select all the &ltdiv&gt with special selector and output them with the key of the index of thire occurence.
+1. So I derived a FilePager constructed with the path to the file. When override the convert() method, I select all the &lt;div&gt; with special selector and output them with the key of the index of thire occurence.
 
 2. Then I implements a Combiner to combine all the previous together in order of their occurence.(This combiner is not necessary, infact you can directly handle the output in main function)
 
-3. Use the combined info, I instance many other new Pagers which is responding to extract only the &ltdiv&gt contains the article in the page.
+3. Use the combined info, I instance many other new Pagers which is responding to extract only the &lt;div&gt; contains the article in the page.
 
-4. Implements a new Combiner to collect all the &ltdiv&gts to one HTML file.
+4. Implements a new Combiner to collect all the &lt;div&gt; to one HTML file.
 
 TODO:
 

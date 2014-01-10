@@ -42,7 +42,8 @@ public class Fetcher {
 						try {
 							pager.setDoc(fetch(this.pager));
 							tryTime = 3;
-							logger.info("Success crawled:" + pager.getId());
+							logger.trace("Success crawled" + pager.getId() + ":" + pager.getUri());
+							((HttpPager)pager).store();
 						} catch (IOException e) {
 							logger.error("Fail(" + tryTime + ") to crawl for URL:" + url + "\n"
 									+ e);
@@ -57,7 +58,10 @@ public class Fetcher {
 		protected Document fetch(Pager pager) throws IOException {
 			Document result = null;
 			if (pager instanceof HttpPager) {
-				result = Jsoup.connect(pager.getUri()).timeout(20000).get();				
+				result = Jsoup.connect(pager.getUri())
+				    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36")
+				    .timeout(60000)
+				    .get();				
 			} else if (pager instanceof FilePager) {
 				File file = new File(pager.getUri());
 				result = Jsoup.parse(file, "UTF-8");				
@@ -66,15 +70,16 @@ public class Fetcher {
 			return result;
 		}
 	}
-	
-	public Fetcher() {
 
+	public Fetcher() {
+	  System.setProperty("http.proxyHost", "127.0.0.1");
+	  System.setProperty("http.proxyPort", "8087");
 	}
-	
+
 	public boolean fetch(List<? extends Pager> pagers) {
 		boolean result = true;
 		List<LonelyPager> waiting = new ArrayList<LonelyPager>();
-		ExecutorService threadPool = Executors.newFixedThreadPool(10);
+		ExecutorService threadPool = Executors.newFixedThreadPool(1);
 		for (Pager p : pagers) {
 			threadPool.execute(new LonelyPager(p));
 		}

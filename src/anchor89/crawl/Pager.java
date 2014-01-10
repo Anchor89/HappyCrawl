@@ -1,21 +1,24 @@
 package anchor89.crawl;
 
 import java.util.Map;
+
 import org.jsoup.nodes.Document;
 
-public abstract class Pager {
+public abstract class Pager<K, V> {
 	protected String uri;
 	protected String id;
 	protected Document doc = null;
-	public Pager(String id) {
-		this.id = id;
-	}
-	public Pager(String id, String uri) {
-		this.id = id;
-		this.uri = uri;
-	}
+    
+  public Pager(String id) {
+    this.id = id;
+  }
+  
+  public Pager(String id, String uri) {
+    this.id = id;
+    this.uri = uri;
+  }
 
-	public abstract Map<String, String> convert();
+	public abstract Map<K, V> convert();
 
 	public String getUri() {
 		return uri;

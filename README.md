@@ -9,7 +9,7 @@ The whole process seems like MapReduce.
 
 There are three roles in this framework. 
 
-1. A Pager is responding for store a page and extract infomation locally to key-value pairs. A Pager only need to initialized with a URI
+1. A Pager is responding for store a page and extract information locally to key-value pairs. A Pager only need to initialized with a URI
 
 2. A Fetcher will fetch a collection of pagers based on their URI. URI means these page can both on local disk or from web. The fetching process is in multi-threads.
 

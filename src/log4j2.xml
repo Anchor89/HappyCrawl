@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="debug" strict="true" name="XMLConfigTest" packages="org.apache.logging.log4j.test">
+<configuration status="off" strict="true" name="XMLConfigTest" packages="org.apache.logging.log4j.test">
     <properties>
         <property name="logdir">log</property>
         <property name="filename">HappyCrawler</property>
@@ -22,7 +22,7 @@
     </appenders>
 
     <loggers>
-        <root level="trace">
+        <root level="info">
             <appender-ref ref="Console" />
             <appender-ref ref="File" />
         </root>

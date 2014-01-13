@@ -3,6 +3,7 @@
     <properties>
         <property name="logdir">log</property>
         <property name="filename">HappyCrawler</property>
+        <property name="testfilename">HappyCrawlerTest</property>
         <property name="pattern">%highlight{%-5p %d{HH:mm:ss.SSS} [%t] %logger{36}- %msg%n}</property>
     </properties>
 
@@ -11,7 +12,7 @@
             <PatternLayout pattern="${pattern}"/>
         </Console>
 
-        <File name="File" fileName="${logdir}/${filename}.log" >
+        <File name="File" fileName="${logdir}/${testfilename}.log" >
             <PatternLayout pattern="${pattern}" />
         </File>
 

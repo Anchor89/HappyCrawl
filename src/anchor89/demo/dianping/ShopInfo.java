@@ -24,12 +24,12 @@ public class ShopInfo {
   private long time;
   public ShopInfo initFromDoc(Document doc) {
     Elements shopTitleEle = doc.select("h1.shop-title");
-    Elements localtionEle= doc.select("div.shop-location li:eq(1)");
-    Elements callEle = doc.select("div.shop-location li:eq(2)");
+    Elements localtionEle= doc.select("div.shop-location li:eq(0)");
+    Elements callEle = doc.select("div.shop-location li:eq(1)");
     Elements costAverEle = doc.select("div.rst-taste strong.stress");
     Elements rateEle = doc.select("div.rst-taste span.rst");
     Elements groupPromEle = doc.select("div.promo-list li");
-    Elements commentEle = doc.select("div.comment-tab li[data-name='all'] em");
+    Elements commentEle = doc.select("div.comment-tab li:eq(2) em");
     
     shopTitle = U.firstTextOrEmpty(shopTitleEle);
     location = U.firstTextOrEmpty(localtionEle);
@@ -48,6 +48,9 @@ public class ShopInfo {
     return this;
   }
   
+  public static String csvHeadLine() {
+    return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", "shopTitle", "location", "call", "costAver", "rateTaste", "rateEnv", "rateService", "groupProm", "comment", "crawled_time");
+  }
   public String toCsvLine() {
     return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%d", shopTitle, location, call, costAver, rateTaste, rateEnv, rateService, groupProm, comment, time);
   }

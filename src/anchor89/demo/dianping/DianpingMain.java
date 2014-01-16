@@ -132,9 +132,11 @@ public class DianpingMain {
   private static void crawlDistrinctPage() {
     final String ajaxSearchUrl = "http://www.dianping.com/search/ajax/regionlist/category/2/0";
     // Init URLs of district to be crawled
-    urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r9157",1));
-    urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r328",1));
     urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r14",1));
+    
+    /*
+    urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r328",1));
+    urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r9157",1));
     urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r15",1));
     urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r20",1));
     urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r9158",1));
@@ -144,9 +146,9 @@ public class DianpingMain {
     urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r5952",1));
     urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r5950",1));
     urls.add(new UrlCandidate("","http://www.dianping.com/search/category/2/0/r21",1));
-
+  */
     // Get subarea urls
-    Fetcher fetcher = new Fetcher();
+    Fetcher fetcher = new Fetcher().useProxy(false);
     List<HttpPager> pagers = new ArrayList<HttpPager>();
     for (UrlCandidate url : urls) {
       DistrictSearchCategoryPager pager = new DistrictSearchCategoryPager("", url.getBase());
@@ -158,16 +160,21 @@ public class DianpingMain {
       for (HttpPager pager : pagers) {
         Map<String, String> cooked = pager.convert();
         for (String key : cooked.keySet()) {
+          logger.info(key + ":" + cooked.get(key));
           AjaxAreaPager ajax = new AjaxAreaPager(key, ajaxSearchUrl+cooked.get(key));
-          ajaxes.add(ajax);
+//          ajaxes.add(ajax);
         }        
       }
+    }
+    
+    if (fetcher.fetch(ajaxes)) {
+      
     }
     
   }
   
   public static void main(String[] args) throws IOException {
-    
+    crawlDistrinctPage();
   }
 
 }

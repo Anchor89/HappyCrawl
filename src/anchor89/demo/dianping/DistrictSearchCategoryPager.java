@@ -43,9 +43,7 @@ public class DistrictSearchCategoryPager extends HttpPager<String, String>{
     Elements areaLi = ul.first().child(1).child(0).children();
 //    logger.info(areaLi);
     for (Element li : areaLi) {
-      logger.info(li);
       Pair res = parseAnchor(li.child(0));
-      logger.info(res);
       int end = res.key.indexOf('&');
       res.key = distrinct + " " + res.key.substring(0, end > 0? res.key.length():end);
       res.value = res.value.substring(res.value.lastIndexOf('/'));

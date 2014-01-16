@@ -8,18 +8,14 @@ import org.apache.logging.log4j.LogManager;
 
 import anchor89.crawl.HttpPager;
 
-public class AjaxAreaPager extends HttpPager<String, String> {
+public class AjaxAreaPager {
   final private static Logger logger = LogManager
       .getLogger(AjaxAreaPager.class);
 
+  private String id = "";
+  private String url = "";
   public AjaxAreaPager(String id, String url) {
-    super(id, url);
-  }
-
-  @Override
-  public Map<String, String> convert() {
-    Map<String, String> result = new HashMap<String, String>();
-    logger.info(doc);
-    return result;
+    this.id = id;
+    this.url = url;
   }
 }
